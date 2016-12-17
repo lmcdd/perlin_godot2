@@ -2,7 +2,7 @@
 export var imgx = 80
 export var imgy = 60
 export var persistence = 0.7
-var SIZE_RECT = 10
+var SIZE_RECT = 5
 var imgAr = []
 
 func perlin(imgx, imgy, persistence):
@@ -55,14 +55,25 @@ func _ready():
 	for ky in range(imgy):
 		for kx in range(imgx):	
 			var c = int(imgAr[ky][kx] / totAmp * 255)
-			imgAr[ky][kx] = Color(c/1000.0, c/1000.0, c/1000.0)
+			imgAr[ky][kx] = c/1000.0
 			print(c,' ',c,' ',c)
+	
+func biome(e):
+	#print(e)
+	if (e < 0.1): return Color(0,0,1) #WATER
+	elif (e < 0.11): return Color('ffeead') #BEACH
+	elif (e < 0.12): return Color('228B22') #FOREST
+	elif (e < 0.13): return Color('347C2C') #JUNGLE
+	elif (e < 0.14): return Color('D2AC6B') #SAVANNAH
+	elif (e < 0.15): return Color('D6B75D') #DESERT
+	else: return Color(1,1,1) #SNOW
 	
 func _draw():
 	var i = 0
 	while (i < imgx): 
 		var j = 0
 		while (j < imgy): 	
-			draw_rect(Rect2(Vector2(i * SIZE_RECT, j * SIZE_RECT), Vector2(SIZE_RECT, SIZE_RECT)),imgAr[j][i])
+			draw_rect(Rect2(Vector2(i * SIZE_RECT, j * SIZE_RECT), Vector2(SIZE_RECT, SIZE_RECT)), Color(imgAr[j][i],imgAr[j][i],imgAr[j][i]))
+			draw_rect(Rect2(Vector2((imgx * SIZE_RECT) + i * SIZE_RECT, j * SIZE_RECT), Vector2(SIZE_RECT, SIZE_RECT)), biome(imgAr[j][i]))
 			j+=1
 		i+=1
