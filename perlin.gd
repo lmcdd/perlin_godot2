@@ -1,10 +1,13 @@
 
-export var imgx = 80
-export var imgy = 80
+export var imgx = 800
+export var imgy = 600
+export var persistence = 0.7
+var imgAr = []
 
-func perlin(imgx, imgy):
-	var octaves = int(log(max(imgx, imgy)) / log(2.0))
-	var persistence = randf()
+func perlin(imgx, imgy, persistence):
+	var octaves = int(log(max(imgx, imgy)) / log(2))
+	print('persistence = ', persistence)
+	randomize()
 	var imgAr = []
 	for j in range(imgy):
 		var tmp = []
@@ -43,10 +46,9 @@ func perlin(imgx, imgy):
 				imgAr[ky][kx] += z
 	return [imgAr, totAmp]
 
-var imgAr = []
 func _ready():
 	var r
-	r = perlin(imgx,imgy)
+	r = perlin(imgx,imgy, persistence)
 	imgAr = r[0]
 	var totAmp = r[1]
 	for ky in range(imgy):
@@ -56,7 +58,7 @@ func _ready():
 			print(c,' ',c,' ',c)
 	
 func _draw():
-	var SIZE_RECT = 10
+	var SIZE_RECT = 1
 	var i = 0
 	while (i < imgx): 
 		var j = 0
