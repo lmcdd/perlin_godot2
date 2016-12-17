@@ -1,7 +1,8 @@
 
-export var imgx = 800
-export var imgy = 600
+export var imgx = 80
+export var imgy = 60
 export var persistence = 0.7
+var SIZE_RECT = 10
 var imgAr = []
 
 func perlin(imgx, imgy, persistence):
@@ -58,7 +59,6 @@ func _ready():
 			print(c,' ',c,' ',c)
 	
 func _draw():
-	var SIZE_RECT = 1
 	var i = 0
 	while (i < imgx): 
 		var j = 0

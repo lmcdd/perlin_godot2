@@ -5,8 +5,8 @@
 [node name="Node2D" type="Node2D"]
 
 script/script = ExtResource( 1 )
-imgx = 800
-imgy = 600
+imgx = 80
+imgy = 60
 persistence = 0.7
 
 
